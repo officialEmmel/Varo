@@ -1,0 +1,29 @@
+game:
+  started: false
+border:
+  size: 1000
+  factor: 0.5
+spawn:
+  world: world
+  x: 0
+  y: 64
+  z: 0
+teams:
+  size: 2
+  teams:
+    - name: Team 1
+      color: RED
+      players:
+        - name: Player 1
+          uuid: 00000000-0000-0000-0000-000000000000
+        - name: Player 2
+          uuid: 00000000-0000-0000-0000-000000000000
+    - name: Team 2
+      color: BLUE
+      players:
+        - name: Player 3
+          uuid: 00000000-0000-0000-0000-000000000000
+        - name: Player 4
+          uuid: 00000000-0000-0000-0000-000000000000
+time:
+  time_per_day: 1200

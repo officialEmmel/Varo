@@ -1,0 +1,4 @@
+name: Varo
+version: '${project.version}'
+main: network.emmel.varo.Varo
+api-version: 1.19
