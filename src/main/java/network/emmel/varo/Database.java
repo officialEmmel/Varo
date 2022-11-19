@@ -27,7 +27,7 @@ public class Database {
                     + "	teamPoints integer NOT NULL,\n"
                     + "	soloPoints integer NOT NULL,\n"
                     + " timePlayedTotal integer NOT NULL,\n"
-                    + " timeLeftToday integer NOT NULL\n"
+                    + " timeLeftToday integer NOT NULL\n,"
                     + ");";
             String team_table = "CREATE TABLE IF NOT EXISTS teams (\n"
                     + "	id integer PRIMARY KEY,\n"
@@ -39,6 +39,7 @@ public class Database {
                     + "	teamPoints integer NOT NULL,\n"
                     + "	timePlayedTotal integer NOT NULL\n"
                     + ");";
+
             Statement stmt = conn.createStatement();
             stmt.execute(player_table);
             stmt.execute(team_table);

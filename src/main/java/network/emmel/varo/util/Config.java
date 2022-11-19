@@ -4,12 +4,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 import network.emmel.varo.Varo;
 import org.bukkit.*;
 import java.io.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ArrayList;
 
 public class Config {
 
-    public static Varo plugin;
+    public Varo plugin;
 
     public Config(Varo plugin) {
         this.plugin = plugin;
@@ -59,8 +61,31 @@ public class Config {
 
     // TODO get teams
 
-    public void getPlayerNames() {
-        List<ArrayList<String>> teams = plugin.getConfig().getList("teams.teams");
+    public List<HashMap> getPlayers() {
+        List<HashMap> players = new ArrayList<HashMap>();
+        List<LinkedHashMap> teamList = (List<LinkedHashMap>) plugin.getConfig().getConfigurationSection("teams").get("teams");
+        for (LinkedHashMap team : teamList) {
+            List<LinkedHashMap> playerList = (List<LinkedHashMap>) team.get("players");
+            for (LinkedHashMap player : playerList) {
+                HashMap<String, String> playerMap = new HashMap<String, String>();
+                playerMap.put("name", player.get("name").toString());
+                playerMap.put("uuid", player.get("uuid").toString());
+                players.add(playerMap);
+            }
+        }
+        return players;
+    }
+
+    public List<HashMap> getTeams() {
+        List<HashMap> teams = new ArrayList<HashMap>();
+        List<LinkedHashMap> teamList = (List<LinkedHashMap>) plugin.getConfig().getConfigurationSection("teams").get("teams");
+        for (LinkedHashMap team : teamList) {
+            HashMap<String, String> teamMap = new HashMap<String, String>();
+            teamMap.put("name", team.get("name").toString());
+            teamMap.put("color", team.get("color").toString());
+            teams.add(teamMap);
+        }
+        return teams;
     }
 
     public int getTimePerDay() {
