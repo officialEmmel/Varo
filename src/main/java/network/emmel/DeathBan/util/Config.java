@@ -1,7 +1,6 @@
-package network.emmel.varo.util;
+package main.java.network.emmel.DeathBan.util;
 
-import org.bukkit.plugin.java.JavaPlugin;
-import network.emmel.varo.Varo;
+import main.java.network.emmel.DeathBan.DeathBan;
 import org.bukkit.*;
 
 import java.util.HashMap;
@@ -42,13 +41,9 @@ public class Config {
         return this.getInt("border.factor");
     }
 
-    public String getWorldName() {
-        return this.getString("world.name");
-    }
-
     public Location getSpawn() {
         return new Location(
-            Bukkit.getWorld(this.getWorldName()),
+            Bukkit.getWorld(this.getString("spawn.world")),
             this.getInt("spawn.x"),
             this.getInt("spawn.y"),
             this.getInt("spawn.z")
@@ -72,6 +67,7 @@ public class Config {
         }
         return players;
     }
+
 
     public List<HashMap> getTeams() {
         List<HashMap> teams = new ArrayList<HashMap>();

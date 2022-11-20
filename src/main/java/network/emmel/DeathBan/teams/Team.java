@@ -1,4 +1,4 @@
-package network.emmel.varo.teams;
+package main.java.network.emmel.DeathBan.teams;
 public class Team {
     public int id;
     public String name;

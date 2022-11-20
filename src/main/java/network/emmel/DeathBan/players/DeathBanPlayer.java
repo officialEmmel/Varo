@@ -1,5 +1,5 @@
-package network.emmel.varo.players;
-public class Player {
+package main.java.network.emmel.DeathBan.players;
+public class DeathBanPlayer {
     public String name;
     public String uuid;
     public int teamId;

@@ -1,8 +1,8 @@
-package network.emmel.varo;
+package main.java.network.emmel.DeathBan;
 
 import java.sql.*;
-import network.emmel.varo.players.Player;
-import network.emmel.varo.teams.Team;
+import main.java.network.emmel.DeathBan.players.DeathBanPlayer;
+import main.java.network.emmel.DeathBan.teams.Team;
 
 public class Database {
     Connection conn;

@@ -1,4 +1,4 @@
-name: Varo
+name: DeathBan
 version: '${project.version}'
-main: network.emmel.varo.Varo
-api-version: 1.19
+main: main.java.network.emmel.DeathBan.DeathBan
+api-version: 1.8

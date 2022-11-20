@@ -1,11 +1,11 @@
-package network.emmel.varo.commands;
+package main.java.network.emmel.DeathBan.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import network.emmel.varo.Varo;
+import main.java.network.emmel.DeathBan.DeathBan;
 
 public class StartCommand implements CommandExecutor {
     DeathBan plugin = null;
