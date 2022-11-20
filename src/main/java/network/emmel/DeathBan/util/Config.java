@@ -3,7 +3,7 @@ package network.emmel.varo.util;
 import org.bukkit.plugin.java.JavaPlugin;
 import network.emmel.varo.Varo;
 import org.bukkit.*;
-import java.io.*;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 public class Config {
 
-    public Varo plugin;
+    public DeathBan plugin;
 
-    public Config(Varo plugin) {
+    public Config(DeathBan plugin) {
         this.plugin = plugin;
         plugin.saveDefaultConfig();
     }
@@ -61,16 +61,13 @@ public class Config {
 
     // TODO get teams
 
-    public List<HashMap> getPlayers() {
-        List<HashMap> players = new ArrayList<HashMap>();
+    public List<String> getPlayers() {
+        List<String> players = new ArrayList<String>();
         List<LinkedHashMap> teamList = (List<LinkedHashMap>) plugin.getConfig().getConfigurationSection("teams").get("teams");
         for (LinkedHashMap team : teamList) {
             List<LinkedHashMap> playerList = (List<LinkedHashMap>) team.get("players");
             for (LinkedHashMap player : playerList) {
-                HashMap<String, String> playerMap = new HashMap<String, String>();
-                playerMap.put("name", player.get("name").toString());
-                playerMap.put("uuid", player.get("uuid").toString());
-                players.add(playerMap);
+                players.add(player.get("uuid").toString());
             }
         }
         return players;

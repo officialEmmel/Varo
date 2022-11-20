@@ -10,7 +10,7 @@ public class Player {
     public int timePlayedTotal;
     public int timeLeftToday;
 
-    public Player(
+    public DeathBanPlayer(
             String name,
             String uuid,
             int teamId,

@@ -5,12 +5,14 @@ import network.emmel.varo.players.Player;
 import network.emmel.varo.teams.Team;
 
 public class Database {
-    Connection conn = null;
+    Connection conn;
     public Database(String path, String name) {
         // sqlite 3 database connection
         try {
             // db parameters
             String url = "jdbc:sqlite:" + path + "/" + name + ".db";
+            DriverManager.registerDriver(new org.sqlite.JDBC());
+
             // create a connection to the database
             conn = DriverManager.getConnection(url);
             //TODO print connection status
@@ -27,7 +29,7 @@ public class Database {
                     + "	teamPoints integer NOT NULL,\n"
                     + "	soloPoints integer NOT NULL,\n"
                     + " timePlayedTotal integer NOT NULL,\n"
-                    + " timeLeftToday integer NOT NULL\n,"
+                    + " timeLeftToday integer NOT NULL\n"
                     + ");";
             String team_table = "CREATE TABLE IF NOT EXISTS teams (\n"
                     + "	id integer PRIMARY KEY,\n"
@@ -59,19 +61,20 @@ public class Database {
     }
 
     // ##### PLAYERS #####
-    public void addPlayer(Player player) {
+    public void addPlayer(DeathBanPlayer deathBanPlayer) {
         //TODO add player to database
     }
 
-    public Player getPlayerByUuid(String uuid) {
+    public DeathBanPlayer getPlayerByUuid(String uuid) {
         String sql = "SELECT name, uuid, teamId, alive, soloKills, soloDeaths, teamPoints, soloPoints, timePlayedTotal, timeLeftToday FROM players WHERE uuid = ?";
         try {
+            conn = DriverManager.getConnection("jdbc:sqlite:DeathBan.db");
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, uuid);
             ResultSet rs = pstmt.executeQuery();
-            Player p = null;
+            DeathBanPlayer p = null;
             try {
-                p = new Player(
+                p = new DeathBanPlayer(
                         rs.getString("name"),
                         rs.getString("uuid"),
                         rs.getInt("teamId"),
@@ -88,19 +91,27 @@ public class Database {
             return p;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
         return null;
     }
 
-    public Player getPlayerByName(String name) {
+    public DeathBanPlayer getPlayerByName(String name) {
         String sql = "SELECT name, uuid, teamId, alive, soloKills, soloDeaths, teamPoints, soloPoints, timePlayedTotal, timeLeftToday FROM players WHERE name = ?";
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, name);
             ResultSet rs = pstmt.executeQuery();
-            Player p = null;
+            DeathBanPlayer p = null;
             try {
-                p = new Player(
+                p = new DeathBanPlayer(
                         rs.getString("name"),
                         rs.getString("uuid"),
                         rs.getInt("teamId"),
